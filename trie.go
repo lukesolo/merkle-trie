@@ -1,25 +1,10 @@
-package main
+package trie
 
 import (
 	"bytes"
 	"fmt"
+	"strings"
 )
-
-func main() {
-	tree := NewMerkleTrie()
-	b1 := []byte{1 << 7}
-	b2 := []byte{1 << 6}
-	b3 := []byte{(1 << 7) + (1 << 6)}
-	tree.Add(b1)
-	tree.Add(b2)
-	tree.Add(b3)
-	tree.Add([]byte{1, 5})
-	tree.Add([]byte{1, 4})
-	tree.Add([]byte{0, 0})
-	tree.Add([]byte{255})
-
-	tree.Print()
-}
 
 func NewMerkleTrie() *MerkleTrie {
 	return &MerkleTrie{
@@ -43,20 +28,7 @@ func (t *MerkleTrie) Add(hash []byte) {
 }
 
 func (t *MerkleTrie) Print() {
-	traverse(t.root, "")
-}
-
-func traverse(n *node, prefix string) {
-	if n.value != nil {
-		fmt.Printf("%s %8b\n", prefix, *n.value)
-		return
-	}
-	if n.left != nil {
-		traverse(n.left, prefix+"0")
-	}
-	if n.right != nil {
-		traverse(n.right, prefix+"1")
-	}
+	traversePrint(t.root, "")
 }
 
 func newNode(level byte, value *[]byte) *node {
@@ -103,4 +75,25 @@ func (n *node) add(hash []byte) {
 		n.value = nil
 		n.add(value)
 	}
+}
+
+func traversePrint(n *node, prefix string) {
+	if n.value != nil {
+		fmt.Printf("%s %s\n", prefix, formatBinary(*n.value))
+		return
+	}
+	if n.left != nil {
+		traversePrint(n.left, prefix+"0")
+	}
+	if n.right != nil {
+		traversePrint(n.right, prefix+"1")
+	}
+}
+
+func formatBinary(bs []byte) string {
+	strs := make([]string, len(bs), len(bs))
+	for i, b := range bs {
+		strs[i] = fmt.Sprintf("%08b", b)
+	}
+	return strings.Join(strs, "")
 }
