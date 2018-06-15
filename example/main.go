@@ -24,7 +24,7 @@ func main() {
 	tree.Add([]byte{255}, nil)
 
 	tree.Print()
-	fmt.Printf("%x", tree.Hash())
+	fmt.Printf("%x\n", tree.Hash())
 }
 
 func depth() {
