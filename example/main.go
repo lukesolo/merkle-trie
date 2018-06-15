@@ -4,7 +4,7 @@ import (
 	"crypto/rand"
 	"fmt"
 
-	"github.com/lukesolo/trie"
+	"github.com/lukesolo/merkle-trie"
 )
 
 func main() {

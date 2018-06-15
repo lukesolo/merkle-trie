@@ -5,7 +5,7 @@ import (
 	"crypto/rand"
 	"testing"
 
-	"github.com/lukesolo/trie"
+	"github.com/lukesolo/merkle-trie"
 )
 
 func ExampleLowestNumbers() {
