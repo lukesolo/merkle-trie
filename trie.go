@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+// NewMerkleTrie initialize empty merkle trie
 func NewMerkleTrie() *MerkleTrie {
 	return &MerkleTrie{
 		root:  newNode(0, nil, nil),
@@ -14,11 +15,13 @@ func NewMerkleTrie() *MerkleTrie {
 	}
 }
 
+// MerkleTrie is implementation of prefix tree for binary keys
 type MerkleTrie struct {
 	root  *node
 	empty bool
 }
 
+// Add new key to the trie or replace value if key already exists
 func (t *MerkleTrie) Add(key, value []byte) {
 	if t.empty {
 		t.root.key = key
@@ -29,6 +32,7 @@ func (t *MerkleTrie) Add(key, value []byte) {
 	}
 }
 
+// Hash calculates sha256 checksum of values stored in trie.
 func (t *MerkleTrie) Hash() []byte {
 	if t.empty {
 		h := sha256.New()
@@ -37,6 +41,7 @@ func (t *MerkleTrie) Hash() []byte {
 	return hash(t.root)
 }
 
+// MaxDepth calculate max level of trie
 func (t *MerkleTrie) MaxDepth() byte {
 	if t.empty {
 		return 0
@@ -83,6 +88,7 @@ func hash(n *node) []byte {
 	return h.Sum(nil)
 }
 
+// Print list of keys with prefixes and values
 func (t *MerkleTrie) Print() {
 	traversePrint(t.root, "")
 }
