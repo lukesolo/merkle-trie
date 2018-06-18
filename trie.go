@@ -144,7 +144,7 @@ func (n *node) add(key, value []byte) {
 
 func traversePrint(n *node, prefix string) {
 	if n.key != nil {
-		fmt.Printf("%s %s\n", prefix, formatBinary(n.key))
+		fmt.Printf("%s %s %v\n", prefix, formatBinary(n.key), n.value)
 		return
 	}
 	if n.left != nil {
