@@ -71,7 +71,8 @@ func (t *MerkleTrie) MaxDepth() byte {
 func hash(n *node) []byte {
 	if n.key != nil {
 		h := sha256.New()
-		return h.Sum(n.value)
+		h.Write(n.value)
+		return h.Sum(nil)
 	}
 	if n.left == nil {
 		return hash(n.right)

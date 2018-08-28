@@ -29,6 +29,15 @@ func ExampleEmptyMerkleTrieHash() {
 	// e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 }
 
+func ExampleOneNode() {
+	tree := trie.NewMerkleTrie()
+	tree.Add([]byte{1}, []byte{2})
+	fmt.Printf("%x\n", tree.Hash())
+
+	// Output:
+	// dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986
+}
+
 func ExampleSetHighBit() {
 	tree := trie.NewMerkleTrie()
 	tree.Add(zero(), nil)
