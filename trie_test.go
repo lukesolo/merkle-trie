@@ -104,7 +104,7 @@ func ExampleMerkleTrie_MaxDepth() {
 	tree.Add([]byte{127, 255, 0, 128}, []byte{4})
 	fmt.Println(tree.MaxDepth())
 
-	// Output
+	// Output:
 	// 0
 	// 1
 	// 9
